@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
