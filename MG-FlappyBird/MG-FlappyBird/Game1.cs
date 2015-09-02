@@ -12,10 +12,13 @@ namespace MG_FlappyBird
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        GameMain main;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -27,6 +30,7 @@ namespace MG_FlappyBird
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            main = new GameMain();
 
             base.Initialize();
         }
@@ -37,7 +41,6 @@ namespace MG_FlappyBird
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -59,10 +62,9 @@ namespace MG_FlappyBird
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
+            main.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -74,9 +76,9 @@ namespace MG_FlappyBird
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
+            main.Draw(spriteBatch);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
