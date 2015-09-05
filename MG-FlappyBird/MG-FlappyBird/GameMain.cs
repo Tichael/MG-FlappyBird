@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,13 @@ namespace MG_FlappyBird
         {
             
         }
-
+        
         // METHODS
 
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
         {
-
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

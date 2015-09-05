@@ -9,7 +9,7 @@ namespace MG_FlappyBird
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         GameMain main;
