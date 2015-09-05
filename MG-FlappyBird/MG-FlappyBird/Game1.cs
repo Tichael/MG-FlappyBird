@@ -11,8 +11,8 @@ namespace MG_FlappyBird
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public static int screenWidth = GraphicsDeviceManager.DefaultBackBufferWidth;
-        public static int screenHeight = GraphicsDeviceManager.DefaultBackBufferHeight;
+        public static int screenWidth;
+        public static int screenHeight;
 
         GameMain main;
 
@@ -21,6 +21,11 @@ namespace MG_FlappyBird
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            graphics.PreferredBackBufferWidth = 768;
+            graphics.PreferredBackBufferHeight = 512;
+
+            screenWidth = graphics.PreferredBackBufferWidth;
+            screenHeight = graphics.PreferredBackBufferHeight;
         }
 
         /// <summary>

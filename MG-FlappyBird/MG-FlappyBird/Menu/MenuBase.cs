@@ -18,16 +18,22 @@ namespace MG_FlappyBird.Menu
         public MenuBase()
         {
             sprite = RessourcesManager.sprite;
-            background = new Rectangle(0, 0, 270, 480);
-            backgroundSource = new Rectangle(0, 0, 144, 256);
+            background = new Rectangle(0, 0, 1104, 512);
+            backgroundSource = new Rectangle(0, 0, 552, 256);
         }
 
         // Methods
+        private void Background()
+        {
+            background.X--;
+            if (background.X <= -276)
+                background.X = 0;
+        }
 
         // Update & Draw
         public void Update(GameTime gameTime)
         {
-
+            Background();
         }
         
         public void Draw(SpriteBatch spriteBatch)
