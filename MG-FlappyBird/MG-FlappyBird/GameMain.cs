@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MG_FlappyBird.Menu;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -11,14 +12,12 @@ namespace MG_FlappyBird
     class GameMain
     {
         // FIELDS
-        Texture2D texture;
-        Rectangle rectangle;
+        MenuBase menuBase;
 
         // CONSTRUCTOR
         public GameMain()
         {
-            texture = RessourcesManager.sprite;
-            rectangle = new Rectangle(Game1.screenWidth / 2, Game1.screenHeight / 2, 100, 100);
+            menuBase = new MenuBase();
         }
         
         // METHODS
@@ -26,24 +25,12 @@ namespace MG_FlappyBird
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && Keyboard.GetState().IsKeyUp(Keys.Left))
-                rectangle.X += 3;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right))
-                rectangle.X -= 3;
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && Keyboard.GetState().IsKeyUp(Keys.Down))
-                rectangle.Y -= 3;
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
-                rectangle.Y += 3;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Add) && Keyboard.GetState().IsKeyUp(Keys.Subtract))
-                rectangle.Inflate(5, 5);
-            if (Keyboard.GetState().IsKeyDown(Keys.Subtract) && Keyboard.GetState().IsKeyUp(Keys.Add))
-                rectangle.Inflate(-5, -5);
+            menuBase.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            menuBase.Draw(spriteBatch);
         }
     }
 }
