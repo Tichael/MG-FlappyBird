@@ -30,7 +30,6 @@ namespace MG_FlappyBird
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            main = new GameMain();
 
             base.Initialize();
         }
@@ -42,6 +41,8 @@ namespace MG_FlappyBird
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            RessourcesManager.LoadContent(Content);
+            main = new GameMain();
 
             // TODO: use this.Content to load your game content here
         }
