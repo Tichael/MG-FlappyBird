@@ -18,7 +18,7 @@ namespace MG_FlappyBird
         public GameMain()
         {
             texture = RessourcesManager.sprite;
-            rectangle = new Rectangle(10, 25, 100, 80);
+            rectangle = new Rectangle(Game1.screenWidth / 2, Game1.screenHeight / 2, 100, 100);
         }
         
         // METHODS
@@ -34,6 +34,11 @@ namespace MG_FlappyBird
                 rectangle.Y -= 3;
             if (Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
                 rectangle.Y += 3;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Add) && Keyboard.GetState().IsKeyUp(Keys.Subtract))
+                rectangle.Inflate(5, 5);
+            if (Keyboard.GetState().IsKeyDown(Keys.Subtract) && Keyboard.GetState().IsKeyUp(Keys.Add))
+                rectangle.Inflate(-5, -5);
         }
 
         public void Draw(SpriteBatch spriteBatch)

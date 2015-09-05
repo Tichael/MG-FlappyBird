@@ -9,8 +9,10 @@ namespace MG_FlappyBird
     /// </summary>
     public class Game1 : Game
     {
-        public GraphicsDeviceManager graphics;
+        GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static int screenWidth = GraphicsDeviceManager.DefaultBackBufferWidth;
+        public static int screenHeight = GraphicsDeviceManager.DefaultBackBufferHeight;
 
         GameMain main;
 
