@@ -43,6 +43,7 @@
     <Compile Include="GUI\Bird.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Pipe.cs" />
+    <Compile Include="GUI\Score.cs" />
     <Compile Include="Menu\MenuBase.cs" />
     <Compile Include="Menu\MenuGame.cs" />
     <Compile Include="Menu\MenuMain.cs" />

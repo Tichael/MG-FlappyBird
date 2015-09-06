@@ -21,7 +21,7 @@ namespace MG_FlappyBird.GUI
         // CONSTRUCTORS
         public Pipe(int _startPosition)
         {
-            holeSize = 100;
+            holeSize = 110;
             texture = RessourcesManager.sprite;
             pipeSource = new Rectangle(652, 191, 26, 121);
             rand = new Random();

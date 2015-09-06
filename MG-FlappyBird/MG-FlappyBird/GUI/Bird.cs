@@ -14,10 +14,12 @@ namespace MG_FlappyBird.GUI
         Texture2D texture;
         Rectangle rectangle;
         Rectangle sourceRectangle;
+        float rotation;
+        float rotationSpeed;
 
         float fallSpeed;
-        int fallTime;
-        int displacement;
+        float fallTime;
+        public int displacement;
         int frameCounter;
 
         KeyboardState presentKey;
@@ -28,10 +30,12 @@ namespace MG_FlappyBird.GUI
         {
             texture = RessourcesManager.sprite;
             sourceRectangle = new Rectangle(558, 107, 17, 12);
-            rectangle = new Rectangle(Game1.screenWidth / 2 - sourceRectangle.Width, Game1.screenHeight / 2 - sourceRectangle.Height, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+            rectangle = new Rectangle(Game1.screenWidth / 2, Game1.screenHeight / 2 - sourceRectangle.Height * 2, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+            rotation = 0f;
+            rotationSpeed = 0.3f;
 
-            fallSpeed = 0.5f;
-            fallTime = 0;
+            fallSpeed = 3.5f;
+            fallTime = 0f;
             frameCounter = 1;
             displacement = 0;
         }
@@ -60,7 +64,7 @@ namespace MG_FlappyBird.GUI
 
         private void Flap()
         {
-            fallTime = -15;
+            fallTime = -1.4f;
         }
 
         private void Animation()
@@ -79,9 +83,14 @@ namespace MG_FlappyBird.GUI
             presentKey = Keyboard.GetState();
             if (presentKey.IsKeyDown(Keys.Space) && pastKey != presentKey)
                 Flap();
-            displacement = (int)((fallTime ^ 2) * fallSpeed);
+            displacement = (int)(Math.Sinh(fallTime) * fallSpeed);
+            if (displacement >= 12)
+                displacement = 12;
+            rotation = (float)(Math.Sinh(fallTime)) * rotationSpeed;
+            if (rotation >= 0.9f)
+                rotation = 0.9f;
             rectangle.Y += displacement;
-            fallTime++;
+            fallTime += 0.1f;
             Animation();
             sourceRectangle = new Rectangle(558, 107 + frameCounter * 12, 17, 12);
             pastKey = presentKey;
@@ -89,7 +98,7 @@ namespace MG_FlappyBird.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White, rotation, new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2), SpriteEffects.None, 0f);
         }
     }
 }
