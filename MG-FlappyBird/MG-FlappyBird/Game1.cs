@@ -71,6 +71,10 @@ namespace MG_FlappyBird
         protected override void Update(GameTime gameTime)
         {
             main.Update(gameTime);
+
+            if (GameMain.Quit)
+                Exit();
+
             base.Update(gameTime);
         }
 

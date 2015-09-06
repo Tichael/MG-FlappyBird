@@ -98,7 +98,7 @@ namespace MG_FlappyBird.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White, rotation, new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2), SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White, rotation, new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2), SpriteEffects.None, 0.4f);
         }
     }
 }

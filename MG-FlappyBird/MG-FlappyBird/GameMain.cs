@@ -18,19 +18,23 @@ namespace MG_FlappyBird
         string[] menuList = {"main", "game"};
         static string activeMenu;
         static bool reset;
+        static bool quit;
 
         // CONSTRUCTOR
         public GameMain()
         {
-            mainMenu = new MenuMain();
-            gameMenu = new MenuGame();
-
             activeMenu = menuList[0];
-            reset = false;
+            reset = true;
+            quit = false;
         }
         
         // METHODS
         public static string ChangeMenu { set { activeMenu = value; reset = true; } }
+        public static bool Quit
+        {
+            get { return quit; }
+            set { quit = value; }
+        }
 
         // UPDATE & DRAW
         public void Update(GameTime gameTime)

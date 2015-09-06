@@ -110,8 +110,8 @@ namespace MG_FlappyBird.GUI
                 }
             }
 
-            score = new Rectangle((position.X + characterPosition * (scoreSource.Width * 2)) - (scoreString.Length * scoreSource.Width * 2) / 2, position.Y, scoreSource.Width * 2, scoreSource.Height * 2);
-            spriteBatch.Draw(texture, score, scoreSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            score = new Rectangle((position.X + characterPosition * (scoreSource.Width * 3)) - (scoreString.Length * scoreSource.Width * 3) / 2, position.Y, scoreSource.Width * 3, scoreSource.Height * 3);
+            spriteBatch.Draw(texture, score, scoreSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
         }
 
         // DRAW

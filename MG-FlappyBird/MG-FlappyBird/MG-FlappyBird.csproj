@@ -46,6 +46,7 @@
     <Compile Include="GUI\Score.cs" />
     <Compile Include="Menu\MenuBase.cs" />
     <Compile Include="Menu\MenuGame.cs" />
+    <Compile Include="Menu\MenuGameOver.cs" />
     <Compile Include="Menu\MenuMain.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

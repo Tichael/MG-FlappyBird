@@ -45,6 +45,16 @@ namespace MG_FlappyBird.GUI
         {
             get { return button.Height; }
         }
+        public int ButtonX
+        {
+            get { return button.X; }
+            set { button.X = value; position.X = value; }
+        }
+        public int ButtonY
+        {
+            get { return button.Y; }
+            set { button.Y = value; position.Y = value; }
+        }
 
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
@@ -80,7 +90,7 @@ namespace MG_FlappyBird.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, button, buttonSource, color, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, button, buttonSource, color, 0f, Vector2.Zero, SpriteEffects.None, 0.3f);
         }
     }
 }

@@ -16,6 +16,11 @@ namespace MG_FlappyBird.Menu
         Rectangle logoSource;
         double counter = 0;
         Button startButton;
+        Button quitButton;
+
+        Rectangle highScoreRectangle;
+        Rectangle highScoreSource;
+        Score score;
 
         // CONSTRUCTOR
         public MenuMain()
@@ -24,7 +29,12 @@ namespace MG_FlappyBird.Menu
             logoPosition = new Vector2(Game1.screenWidth / 2 - logoSource.Width * 3 / 2, Game1.screenHeight / 2 - logoSource.Height * 3 / 2 - 128);
             logoSize = new Vector2(logoSource.Width * 3, logoSource.Height * 3);
 
+            highScoreSource = new Rectangle(558, 282, 65, 7);
+            highScoreRectangle = new Rectangle(Game1.screenWidth / 2, 0, highScoreSource.Width * 3, highScoreSource.Height * 3);
+            score = new Score(highScoreRectangle.X + highScoreRectangle.Width + 48, highScoreRectangle.Y, false);
+
             startButton = new Button(sprite, new Point(Game1.screenWidth / 2, Game1.screenHeight / 2), new Rectangle(558, 198, 40, 14));
+            quitButton = new Button(sprite, new Point(Game1.screenWidth / 2, startButton.ButtonY + startButton.ButtonHeight * 2), new Rectangle(558, 268, 40, 14));
         }
 
         // METHODS
@@ -46,16 +56,20 @@ namespace MG_FlappyBird.Menu
             LogoAnimation();
             startButton.Update(gameTime);
             if (startButton.Clicked)
-            {
                 GameMain.ChangeMenu = "game";
-            }
+            quitButton.Update(gameTime);
+            if (quitButton.Clicked)
+                GameMain.Quit = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.Draw(sprite, new Rectangle((int)logoPosition.X, (int)logoPosition.Y, (int)logoSize.X, (int)logoSize.Y), logoSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(sprite, new Rectangle((int)logoPosition.X, (int)logoPosition.Y, (int)logoSize.X, (int)logoSize.Y), logoSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(sprite, highScoreRectangle, highScoreSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            score.Draw(spriteBatch, highScore.ToString());
             startButton.Draw(spriteBatch);
+            quitButton.Draw(spriteBatch);
         }
     }
 }
