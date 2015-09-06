@@ -12,12 +12,12 @@ namespace MG_FlappyBird
     class GameMain
     {
         // FIELDS
-        MenuBase menuBase;
+        MenuMain mainMenu;
 
         // CONSTRUCTOR
         public GameMain()
         {
-            menuBase = new MenuBase();
+            mainMenu = new MenuMain();
         }
         
         // METHODS
@@ -25,12 +25,12 @@ namespace MG_FlappyBird
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
         {
-            menuBase.Update(gameTime);
+            mainMenu.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            menuBase.Draw(spriteBatch);
+            mainMenu.Draw(spriteBatch);
         }
     }
 }

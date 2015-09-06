@@ -7,38 +7,53 @@ using System.Text;
 
 namespace MG_FlappyBird.Menu
 {
-    class MenuBase
+    public abstract class MenuBase
     {
         // Fields
-        Texture2D sprite;
+        protected Texture2D sprite;
+
         Rectangle background;
         Rectangle backgroundSource;
+
+        Rectangle ground;
+        Rectangle groundSource;
 
         // Constructor
         public MenuBase()
         {
             sprite = RessourcesManager.sprite;
-            background = new Rectangle(0, 0, 1104, 512);
             backgroundSource = new Rectangle(0, 0, 552, 256);
+            background = new Rectangle(0, 0, backgroundSource.Width * 2, backgroundSource.Height * 2);
+            groundSource = new Rectangle(0, 256, 553, 56);
+            ground = new Rectangle(0, Game1.screenHeight - groundSource.Height * 2, groundSource.Width * 2, groundSource.Height * 2);
         }
 
         // Methods
-        private void Background()
+        private void BackgroundMovement()
         {
             background.X--;
             if (background.X <= -276)
                 background.X = 0;
         }
 
-        // Update & Draw
-        public void Update(GameTime gameTime)
+        private void GroundMovement()
         {
-            Background();
+            ground.X -= 2;
+            if (ground.X <= -14)
+                ground.X = 0;
+        }
+
+        // Update & Draw
+        public virtual void Update(GameTime gameTime)
+        {
+            BackgroundMovement();
+            GroundMovement();
         }
         
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, background, backgroundSource, Color.White);
+            spriteBatch.Draw(sprite, ground, groundSource, Color.White);
         }
     }
 }
