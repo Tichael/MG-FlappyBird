@@ -40,8 +40,11 @@
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="GameMain.cs" />
+    <Compile Include="GUI\Bird.cs" />
     <Compile Include="GUI\Button.cs" />
+    <Compile Include="GUI\Pipe.cs" />
     <Compile Include="Menu\MenuBase.cs" />
+    <Compile Include="Menu\MenuGame.cs" />
     <Compile Include="Menu\MenuMain.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\pixel.png" />
     <Content Include="Content\sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

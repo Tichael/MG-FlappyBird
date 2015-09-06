@@ -14,9 +14,7 @@ namespace MG_FlappyBird.Menu
         Vector2 logoPosition;
         Vector2 logoSize;
         Rectangle logoSource;
-        float zoom = 0.3f;
-        short direction = 1;
-
+        double counter = 0;
         Button startButton;
 
         // CONSTRUCTOR
@@ -32,11 +30,13 @@ namespace MG_FlappyBird.Menu
         // METHODS
         private void LogoAnimation()
         {
-            logoSize.X += zoom * direction;
+            logoSize.X = (float)(20 * Math.Sin(0.01 * Math.PI * (counter))) + 300;
             logoPosition.X = Game1.screenWidth / 2 - logoSize.X / 2;
-            logoSize.Y -= zoom * direction;
-            if (logoSize.X >= 290 || logoSize.X <= 270)
-                direction = (short)-direction;
+            counter++;
+            if (logoSize.X >= logoSource.Width * 3 && counter >= 200)
+            {
+                counter = 0;
+            }
         }
 
         // UPDATE & DRAW
@@ -44,12 +44,17 @@ namespace MG_FlappyBird.Menu
         {
             base.Update(gameTime);
             LogoAnimation();
+            startButton.Update(gameTime);
+            if (startButton.Clicked)
+            {
+                GameMain.ChangeMenu = "game";
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.Draw(sprite, new Rectangle((int)logoPosition.X, (int)logoPosition.Y, (int)logoSize.X, (int)logoSize.Y), logoSource, Color.White);
+            spriteBatch.Draw(sprite, new Rectangle((int)logoPosition.X, (int)logoPosition.Y, (int)logoSize.X, (int)logoSize.Y), logoSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             startButton.Draw(spriteBatch);
         }
     }

@@ -11,11 +11,13 @@ namespace MG_FlappyBird
     {
         // STATIC FIELDS
         public static Texture2D sprite;
+        public static Texture2D pixel;
 
         // LOAD CONTENT
         public static void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("sprite");
+            pixel = content.Load<Texture2D>("pixel");
         }
     }
 }

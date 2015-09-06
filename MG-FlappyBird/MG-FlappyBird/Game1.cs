@@ -70,10 +70,7 @@ namespace MG_FlappyBird
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             main.Update(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -84,7 +81,7 @@ namespace MG_FlappyBird
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
             main.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

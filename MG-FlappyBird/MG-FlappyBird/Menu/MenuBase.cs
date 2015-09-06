@@ -12,6 +12,10 @@ namespace MG_FlappyBird.Menu
         // Fields
         protected Texture2D sprite;
 
+        Texture2D pixel;
+        Rectangle black;
+        float opacty;
+
         Rectangle background;
         Rectangle backgroundSource;
 
@@ -22,6 +26,9 @@ namespace MG_FlappyBird.Menu
         public MenuBase()
         {
             sprite = RessourcesManager.sprite;
+            pixel = RessourcesManager.pixel;
+            black = new Rectangle(0, 0, Game1.screenWidth, Game1.screenHeight);
+            opacty = 1f;
             backgroundSource = new Rectangle(0, 0, 552, 256);
             background = new Rectangle(0, 0, backgroundSource.Width * 2, backgroundSource.Height * 2);
             groundSource = new Rectangle(0, 256, 553, 56);
@@ -48,12 +55,15 @@ namespace MG_FlappyBird.Menu
         {
             BackgroundMovement();
             GroundMovement();
+            if (opacty > 0)
+                opacty -= 0.03f;
         }
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, background, backgroundSource, Color.White);
-            spriteBatch.Draw(sprite, ground, groundSource, Color.White);
+            spriteBatch.Draw(sprite, background, backgroundSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1f);
+            spriteBatch.Draw(sprite, ground, groundSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(pixel, black, new Color(Color.Black, opacty));
         }
     }
 }

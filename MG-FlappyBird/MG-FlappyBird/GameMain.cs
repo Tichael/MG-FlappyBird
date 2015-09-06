@@ -13,24 +13,46 @@ namespace MG_FlappyBird
     {
         // FIELDS
         MenuMain mainMenu;
+        MenuGame gameMenu;
+
+        string[] menuList = {"main", "game"};
+        static string activeMenu;
+        static bool reset;
 
         // CONSTRUCTOR
         public GameMain()
         {
             mainMenu = new MenuMain();
+            gameMenu = new MenuGame();
+
+            activeMenu = menuList[0];
+            reset = false;
         }
         
         // METHODS
+        public static string ChangeMenu { set { activeMenu = value; reset = true; } }
 
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
         {
-            mainMenu.Update(gameTime);
+            if (reset)
+            {
+                mainMenu = new MenuMain();
+                gameMenu = new MenuGame();
+                reset = false;
+            }
+            if (activeMenu == "main")
+                mainMenu.Update(gameTime);
+            else if (activeMenu == "game")
+                gameMenu.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            mainMenu.Draw(spriteBatch);
+            if (activeMenu == "main")
+                mainMenu.Draw(spriteBatch);
+            else if (activeMenu == "game")
+                gameMenu.Draw(spriteBatch);
         }
     }
 }
