@@ -19,8 +19,10 @@ namespace MG_FlappyBird.Menu
         Rectangle background;
         Rectangle backgroundSource;
 
-        Rectangle ground;
+        protected Rectangle ground;
         Rectangle groundSource;
+
+        protected bool paused;
 
         // Constructor
         public MenuBase()
@@ -33,21 +35,28 @@ namespace MG_FlappyBird.Menu
             background = new Rectangle(0, 0, backgroundSource.Width * 2, backgroundSource.Height * 2);
             groundSource = new Rectangle(0, 256, 553, 56);
             ground = new Rectangle(0, Game1.screenHeight - groundSource.Height * 2, groundSource.Width * 2, groundSource.Height * 2);
+            paused = false;
         }
 
         // Methods
         private void BackgroundMovement()
         {
-            background.X--;
-            if (background.X <= -276)
-                background.X = 0;
+            if (!paused)
+            {
+                background.X--;
+                if (background.X <= -276)
+                    background.X = 0;
+            }
         }
 
         private void GroundMovement()
         {
-            ground.X -= 2;
-            if (ground.X <= -14)
-                ground.X = 0;
+            if (!paused)
+            {
+                ground.X -= 2;
+                if (ground.X <= -14)
+                    ground.X = 0;
+            }
         }
 
         // Update & Draw

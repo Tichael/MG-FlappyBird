@@ -46,6 +46,15 @@ namespace MG_FlappyBird.GUI
             }
         }
 
+        public int XpositionUp { get { return pipeUp.X; } }
+        public int XpositionDown { get { return pipeDown.X; } }
+        public int YpositionUp { get { return pipeUp.Y; } }
+        public int YpositionDown { get { return pipeDown.Y; } }
+        public int WidthUp { get { return pipeUp.Width; } }
+        public int WidthDown { get { return pipeDown.Width; } }
+        public int HeightUp { get { return pipeUp.Height; } }
+        public int HeightDown { get { return pipeDown.Height; } }
+
         // UPDATE & DRAW
         public void Update(GameTime gameTime)
         {
