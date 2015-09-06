@@ -42,7 +42,9 @@
     <Compile Include="GameMain.cs" />
     <Compile Include="GUI\Bird.cs" />
     <Compile Include="GUI\Button.cs" />
+    <Compile Include="GUI\Medal.cs" />
     <Compile Include="GUI\Pipe.cs" />
+    <Compile Include="GUI\Pipes.cs" />
     <Compile Include="GUI\Score.cs" />
     <Compile Include="Menu\MenuBase.cs" />
     <Compile Include="Menu\MenuGame.cs" />

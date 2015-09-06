@@ -62,6 +62,11 @@ namespace MG_FlappyBird.GUI
             get { return rectangle.Height; }
         }
 
+        public bool Intersect(Rectangle _rectangle)
+        {
+            return rectangle.Intersects(_rectangle);
+        }
+
         private void Flap()
         {
             fallTime = -1.4f;
@@ -78,10 +83,10 @@ namespace MG_FlappyBird.GUI
         }
 
         // UPDATE & DRAW
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, bool _alive)
         {
             presentKey = Keyboard.GetState();
-            if (presentKey.IsKeyDown(Keys.Space) && pastKey != presentKey)
+            if (presentKey.IsKeyDown(Keys.Space) && pastKey != presentKey && _alive)
                 Flap();
             displacement = (int)(Math.Sinh(fallTime) * fallSpeed);
             if (displacement >= 12)
@@ -98,7 +103,7 @@ namespace MG_FlappyBird.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White, rotation, new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2), SpriteEffects.None, 0.4f);
+            spriteBatch.Draw(texture, rectangle, sourceRectangle, Color.White, rotation, new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2), SpriteEffects.None, 0.5f);
         }
     }
 }

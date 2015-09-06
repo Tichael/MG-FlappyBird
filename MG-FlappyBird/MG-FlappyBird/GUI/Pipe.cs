@@ -14,6 +14,7 @@ namespace MG_FlappyBird.GUI
         Rectangle pipeUp;
         Rectangle pipeDown;
         Rectangle pipeSource;
+        Rectangle pipeHeadSource;
         int holeSize;
         int holePosition;
         Random rand;
@@ -23,11 +24,12 @@ namespace MG_FlappyBird.GUI
         {
             holeSize = 110;
             texture = RessourcesManager.sprite;
-            pipeSource = new Rectangle(652, 191, 26, 121);
+            pipeSource = new Rectangle(654, 157, 24, 155);
+            pipeHeadSource = new Rectangle(553, 300, 26, 12);
             rand = new Random();
-            holePosition = rand.Next(20, 100);
-            pipeDown = new Rectangle(Game1.screenWidth + _startPosition, holePosition + holeSize * 2, pipeSource.Width * 2, pipeSource.Height * 2);
-            pipeUp = new Rectangle(Game1.screenWidth + _startPosition, holePosition - pipeSource.Height, pipeSource.Width * 2, pipeSource.Height * 2);
+            holePosition = rand.Next(0, 200);
+            pipeDown = new Rectangle(Game1.screenWidth + _startPosition, holePosition + holeSize, pipeSource.Width * 2, pipeSource.Height * 2);
+            pipeUp = new Rectangle(Game1.screenWidth + _startPosition, holePosition - pipeSource.Height * 2, pipeSource.Width * 2, pipeSource.Height * 2);
         }
 
         // METHODS
@@ -36,13 +38,14 @@ namespace MG_FlappyBird.GUI
             pipeDown.X -= 2;
             pipeUp.X -= 2;
 
-            if (pipeDown.X <= 0 - pipeDown.Width)
+            if (pipeDown.X <= -1 - pipeDown.Width)
             {
                 pipeDown.X = Game1.screenWidth;
                 pipeUp.X = Game1.screenWidth;
-                holePosition = rand.Next(20, 100);
-                pipeDown.Y = holePosition + holeSize * 2;
-                pipeUp.Y = holePosition - pipeSource.Height;
+                rand = new Random();
+                holePosition = rand.Next(0, 200);
+                pipeDown.Y = holePosition + holeSize;
+                pipeUp.Y = holePosition - pipeSource.Height * 2;
             }
         }
 
@@ -64,7 +67,10 @@ namespace MG_FlappyBird.GUI
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, pipeDown, pipeSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.8f);
-            spriteBatch.Draw(texture, pipeUp, pipeSource, Color.White, 0f, Vector2.Zero, SpriteEffects.FlipVertically, 0.8f);
+            spriteBatch.Draw(texture, new Rectangle((pipeDown.X + pipeDown.Width / 2) - pipeHeadSource.Width, pipeDown.Y, pipeHeadSource.Width * 2, pipeHeadSource.Height * 2), pipeHeadSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.7f);
+
+            spriteBatch.Draw(texture, pipeUp, pipeSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(texture, new Rectangle((pipeUp.X + pipeUp.Width / 2) - pipeHeadSource.Width, pipeUp.Y + pipeUp.Height - pipeHeadSource.Height * 2, pipeHeadSource.Width * 2, pipeHeadSource.Height * 2), pipeHeadSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.7f);
         }
     }
 }

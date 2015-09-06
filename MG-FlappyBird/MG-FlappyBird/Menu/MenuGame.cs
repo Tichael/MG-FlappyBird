@@ -13,6 +13,7 @@ namespace MG_FlappyBird.Menu
     {
         // FIELDS
         MenuGameOver gameOver;
+        bool over;
 
         bool started;
         bool died;
@@ -21,7 +22,8 @@ namespace MG_FlappyBird.Menu
         Button resumeButton;
 
         Bird player;
-        Pipe pipes;
+        //Pipe pipes;
+        Pipes pipes;
         Score actualScore;
         bool addScore;
 
@@ -39,19 +41,17 @@ namespace MG_FlappyBird.Menu
         // CONSTRUCTOR
         public MenuGame()
         {
-            gameOver = new MenuGameOver();
-
             started = false;
             died = false;
+            over = false;
 
             menuButton = new Button(sprite, new Point(60, 21), new Rectangle(558, 212, 40, 14));
             pauseButton = new Button(sprite, new Point(Game1.screenWidth - 13 * 3 / 2, 14 * 3 / 2), new Rectangle(558, 143, 13, 14));
             resumeButton = new Button(sprite, new Point(Game1.screenWidth - 13 * 3 / 2, 14 * 3 / 2), new Rectangle(571, 143, 13, 14));
-
-            player = new Bird();
-            pipes = new Pipe(0);
+            
             actualScore = new Score(Game1.screenWidth / 2, Game1.screenHeight / 2 - 192, true);
             totalScore = 0;
+            newScore = false;
             addScore = true;
             writed = false;
 
@@ -79,9 +79,9 @@ namespace MG_FlappyBird.Menu
                     pauseButton.Update(gameTime);
                     if (pauseButton.Clicked)
                         paused = true;
-                    player.Update(gameTime);
+                    player.Update(gameTime, true);
                     pipes.Update(gameTime);
-                    if (player.YPosition + player.Height / 2 >= Game1.screenHeight - ground.Height || (player.YPosition - player.Height / 2 <= pipes.YpositionUp + pipes.HeightUp && (player.XPosition + player.Width / 2 >= pipes.XpositionUp && player.XPosition - player.Width / 2 <= pipes.XpositionUp + pipes.WidthUp)) || (player.YPosition + player.Height / 2 >= pipes.YpositionDown && (player.XPosition + player.Width >= pipes.XpositionDown && player.XPosition <= pipes.XpositionDown + pipes.WidthDown)))
+                    if (player.YPosition + player.Height / 2 >= Game1.screenHeight - ground.Height)
                     {
                         died = true;
                         started = false;
@@ -91,24 +91,22 @@ namespace MG_FlappyBird.Menu
                     {
                         player.YPosition = 0 + player.Height / 2;
                     }
-                    else if (player.XPosition >= pipes.XpositionUp + pipes.WidthUp && player.XPosition <= pipes.XpositionUp + pipes.WidthUp + 2 && addScore)
-                    {
-                        totalScore++;
-                        addScore = false;
-                    }
-                    else
-                        addScore = true;
                 }
                 else if (died)
                 {
                     // ################ DIED ##############
-                    if (player.YPosition - player.Height / 2 > Game1.screenHeight)
+                    if (player.YPosition - player.Height / 2 > Game1.screenHeight + player.Height)
                     {
+                        if (!over)
+                        {
+                            gameOver = new MenuGameOver();
+                            over = true;
+                        }
                         gameOver.Update(gameTime);
                     }
                     else
                     {
-                        player.Update(gameTime);
+                        player.Update(gameTime, false);
                         if (!writed)
                         {
                             if (totalScore > highScore)
@@ -127,8 +125,8 @@ namespace MG_FlappyBird.Menu
                                 }
                                 System.IO.File.WriteAllLines(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Flappy.txt", txtScore);
                                 highScore = totalScore;
+                                newScore = true;
                             }
-                            totalScore = 0;
                             writed = true;
                         }
                     }
@@ -144,7 +142,7 @@ namespace MG_FlappyBird.Menu
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                         started = true;
                     player = new Bird();
-                    pipes = new Pipe(0);
+                    pipes = new Pipes();
                 }
             }
             else
@@ -187,7 +185,7 @@ namespace MG_FlappyBird.Menu
             {
                 player.Draw(spriteBatch);
                 pipes.Draw(spriteBatch);
-                if (player.YPosition + player.Height / 2 > Game1.screenHeight)
+                if (over)
                 {
                     gameOver.Draw(spriteBatch);
                 }

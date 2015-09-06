@@ -14,7 +14,7 @@ namespace MG_FlappyBird.Menu
 
         Texture2D pixel;
         Rectangle black;
-        float opacty;
+        float opacity;
 
         Rectangle background;
         Rectangle backgroundSource;
@@ -25,9 +25,9 @@ namespace MG_FlappyBird.Menu
         protected bool paused;
         protected bool pauseBackground;
 
-        protected int totalScore;
-
-        protected int highScore;
+        protected static int totalScore;
+        protected static bool newScore;
+        protected static int highScore;
         string[] txtFile;
 
         // Constructor
@@ -38,7 +38,7 @@ namespace MG_FlappyBird.Menu
             sprite = RessourcesManager.sprite;
             pixel = RessourcesManager.pixel;
             black = new Rectangle(0, 0, Game1.screenWidth, Game1.screenHeight);
-            opacty = 1f;
+            opacity = 1f;
 
             backgroundSource = new Rectangle(0, 0, 552, 256);
             background = new Rectangle(0, 0, backgroundSource.Width * 2, backgroundSource.Height * 2);
@@ -78,20 +78,24 @@ namespace MG_FlappyBird.Menu
             }
         }
 
+        public static int HighScore { get { return highScore; } }
+        public static int TotalScore { get { return totalScore; } }
+        public static bool NewScore { get { return newScore; } }
+
         // Update & Draw
         public virtual void Update(GameTime gameTime)
         {
             BackgroundMovement();
             GroundMovement();
-            if (opacty > 0)
-                    opacty -= 0.03f;
+            if (opacity > 0)
+                    opacity -= 0.03f;
         }
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, background, backgroundSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1f);
             spriteBatch.Draw(sprite, ground, groundSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.6f);
-            spriteBatch.Draw(pixel, black, new Rectangle(0, 0, 1, 1), new Color(Color.Black, opacty), 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(pixel, black, new Rectangle(0, 0, 1, 1), new Color(Color.Black, opacity), 0f, Vector2.Zero, SpriteEffects.None, 0f);
         }
     }
 }

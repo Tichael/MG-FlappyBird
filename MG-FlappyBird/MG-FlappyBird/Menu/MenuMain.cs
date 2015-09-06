@@ -29,8 +29,8 @@ namespace MG_FlappyBird.Menu
             logoPosition = new Vector2(Game1.screenWidth / 2 - logoSource.Width * 3 / 2, Game1.screenHeight / 2 - logoSource.Height * 3 / 2 - 128);
             logoSize = new Vector2(logoSource.Width * 3, logoSource.Height * 3);
 
-            highScoreSource = new Rectangle(558, 282, 65, 7);
-            highScoreRectangle = new Rectangle(Game1.screenWidth / 2, 0, highScoreSource.Width * 3, highScoreSource.Height * 3);
+            highScoreSource = new Rectangle(558, 282, 69, 7);
+            highScoreRectangle = new Rectangle(8, 8, highScoreSource.Width * 3, highScoreSource.Height * 3);
             score = new Score(highScoreRectangle.X + highScoreRectangle.Width + 48, highScoreRectangle.Y, false);
 
             startButton = new Button(sprite, new Point(Game1.screenWidth / 2, Game1.screenHeight / 2), new Rectangle(558, 198, 40, 14));
