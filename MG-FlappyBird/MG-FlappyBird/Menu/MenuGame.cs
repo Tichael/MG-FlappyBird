@@ -22,8 +22,7 @@ namespace MG_FlappyBird.Menu
         Button resumeButton;
 
         Bird player;
-        //Pipe pipes;
-        Pipes pipes;
+        Pipe[] pipes;
         Score actualScore;
         bool addScore;
 
@@ -52,7 +51,6 @@ namespace MG_FlappyBird.Menu
             actualScore = new Score(Game1.screenWidth / 2, Game1.screenHeight / 2 - 192, true);
             totalScore = 0;
             newScore = false;
-            addScore = true;
             writed = false;
 
             getReadySource = new Rectangle(584, 135, 87, 22);
@@ -80,22 +78,39 @@ namespace MG_FlappyBird.Menu
                     if (pauseButton.Clicked)
                         paused = true;
                     player.Update(gameTime, true);
-                    pipes.Update(gameTime);
-                    if (player.YPosition + player.Height / 2 >= Game1.screenHeight - ground.Height)
+                    foreach (Pipe pipe in pipes)
+                    {
+                        pipe.Update(gameTime);
+                    }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if ((!player.Intersect(pipes[i].Hole) && player.XPosition + Bird.Width / 2 > pipes[i].XpositionUp && player.XPosition - Bird.Width / 2 < pipes[i].XpositionUp + pipes[i].WidthUp))
+                        {
+                            died = true;
+                        }
+                        else if (player.XPosition >= pipes[i].Hole.X + pipes[i].Hole.Width && player.XPosition <= pipes[i].Hole.X + pipes[i].Hole.Width + 1 && addScore)
+                        {
+                            totalScore++;
+                            addScore = false;
+                        }
+                        else
+                            addScore = true;
+                    }
+                    if (player.YPosition + Bird.Height / 2 >= Game1.screenHeight - ground.Height || died)
                     {
                         died = true;
                         started = false;
                         pauseBackground = true;
                     }
-                    else if (player.YPosition - player.Height / 2 < 0)
+                    else if (player.YPosition - Bird.Height / 2 < 0)
                     {
-                        player.YPosition = 0 + player.Height / 2;
+                        player.YPosition = 0 + Bird.Height / 2;
                     }
                 }
                 else if (died)
                 {
                     // ################ DIED ##############
-                    if (player.YPosition - player.Height / 2 > Game1.screenHeight + player.Height)
+                    if (player.YPosition - Bird.Height / 2 > Game1.screenHeight + Bird.Height)
                     {
                         if (!over)
                         {
@@ -142,7 +157,12 @@ namespace MG_FlappyBird.Menu
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                         started = true;
                     player = new Bird();
-                    pipes = new Pipes();
+                    addScore = true;
+                    pipes = new Pipe[3];
+                    for (int i = 0; i < 3; i++)
+                    {
+                        pipes[i] = new Pipe(i * 267);
+                    }
                 }
             }
             else
@@ -178,13 +198,19 @@ namespace MG_FlappyBird.Menu
                     spriteBatch.Draw(sprite, new Rectangle(Game1.screenWidth / 2 - 162 / 2, Game1.screenHeight / 2 - 60 / 2, 162, 60), new Rectangle(598, 198, 54, 20), Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
                 }
                 player.Draw(spriteBatch);
-                pipes.Draw(spriteBatch);
+                foreach (Pipe pipe in pipes)
+                {
+                    pipe.Draw(spriteBatch);
+                }
                 actualScore.Draw(spriteBatch, totalScore.ToString());
             }
             else if (died)
             {
                 player.Draw(spriteBatch);
-                pipes.Draw(spriteBatch);
+                foreach (Pipe pipe in pipes)
+                {
+                    pipe.Draw(spriteBatch);
+                }
                 if (over)
                 {
                     gameOver.Draw(spriteBatch);

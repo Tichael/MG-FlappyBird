@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MG_FlappyBird.Menu;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,8 @@ namespace MG_FlappyBird.GUI
                 pipeUp.Y = holePosition - pipeSource.Height * 2;
             }
         }
+
+        public Rectangle Hole { get { return new Rectangle(pipeDown.X - Bird.Width / 2, holePosition + Bird.Height * 3 / 2, pipeDown.Width + Bird.Width, holeSize - Bird.Height * 2); } }
 
         public int XpositionUp { get { return pipeUp.X; } }
         public int XpositionDown { get { return pipeDown.X; } }

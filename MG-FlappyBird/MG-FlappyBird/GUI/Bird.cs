@@ -12,7 +12,7 @@ namespace MG_FlappyBird.GUI
     {
         // FIELDS
         Texture2D texture;
-        Rectangle rectangle;
+        static Rectangle rectangle;
         Rectangle sourceRectangle;
         float rotation;
         float rotationSpeed;
@@ -52,12 +52,12 @@ namespace MG_FlappyBird.GUI
             get { return rectangle.X; }
         }
 
-        public int Width
+        public static int Width
         {
             get { return rectangle.Width; }
         }
 
-        public int Height
+        public static int Height
         {
             get { return rectangle.Height; }
         }
