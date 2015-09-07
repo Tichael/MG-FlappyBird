@@ -23,7 +23,7 @@ namespace MG_FlappyBird.GUI
         // CONSTRUCTORS
         public Pipe(int _startPosition)
         {
-            holeSize = 110;
+            holeSize = 80;
             texture = RessourcesManager.sprite;
             pipeSource = new Rectangle(654, 157, 24, 155);
             pipeHeadSource = new Rectangle(553, 300, 26, 12);
