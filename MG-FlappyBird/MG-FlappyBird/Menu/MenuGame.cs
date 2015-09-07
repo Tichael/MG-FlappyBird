@@ -93,11 +93,14 @@ namespace MG_FlappyBird.Menu
                         if ((!player.Intersect(pipes[i].Hole) && player.XPosition + Bird.Width / 2 > pipes[i].XpositionUp && player.XPosition - Bird.Width / 2 < pipes[i].XpositionUp + pipes[i].WidthUp))
                         {
                             died = true;
+                            RessourcesManager.hurt.Play();
+                            player.Flap(false);
                         }
                         else if (player.XPosition >= pipes[i].Hole.X + pipes[i].Hole.Width && player.XPosition <= pipes[i].Hole.X + pipes[i].Hole.Width + 1 && addScore)
                         {
                             totalScore++;
                             addScore = false;
+                            RessourcesManager.pipePassed.Play();
                         }
                         else
                             addScore = true;
@@ -107,6 +110,8 @@ namespace MG_FlappyBird.Menu
                         died = true;
                         started = false;
                         pauseBackground = true;
+                        RessourcesManager.hurt.Play();
+                        player.Flap(false);
                     }
                     else if (player.YPosition - Bird.Height / 2 < 0)
                     {

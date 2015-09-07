@@ -35,3 +35,51 @@
 /processorParam:TextureFormat=Color
 /build:pixel.png
 
+#begin Sounds/buttonClick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/buttonClick.wav
+
+#begin Sounds/flap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/flap.wav
+
+#begin Sounds/hurt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/hurt.wav
+
+#begin Sounds/pipePassed.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pipePassed.wav
+
+#begin Sounds/overHighBronze.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/overHighBronze.wav
+
+#begin Sounds/overHighGold.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/overHighGold.wav
+
+#begin Sounds/overHighNo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/overHighNo.wav
+
+#begin Sounds/overHighSilver.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/overHighSilver.wav
+

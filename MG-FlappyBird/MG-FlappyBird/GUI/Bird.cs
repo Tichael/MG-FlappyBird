@@ -67,9 +67,11 @@ namespace MG_FlappyBird.GUI
             return rectangle.Intersects(_rectangle);
         }
 
-        private void Flap()
+        public void Flap(bool _playSound)
         {
             fallTime = -1.4f;
+            if (_playSound)
+                RessourcesManager.flap.Play();
         }
 
         private void Animation()
@@ -87,7 +89,7 @@ namespace MG_FlappyBird.GUI
         {
             presentKey = Keyboard.GetState();
             if (presentKey.IsKeyDown(Keys.Space) && pastKey != presentKey && _alive)
-                Flap();
+                Flap(true);
             displacement = (int)(Math.Sinh(fallTime) * fallSpeed);
             if (displacement >= 12)
                 displacement = 12;

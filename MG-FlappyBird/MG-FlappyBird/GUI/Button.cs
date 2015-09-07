@@ -74,6 +74,7 @@ namespace MG_FlappyBird.GUI
                     {
                         inClick = false;
                         clicked = true;
+                        RessourcesManager.buttonClick.Play();
                     }
                     else if (inClick == false)
                         clicked = false;

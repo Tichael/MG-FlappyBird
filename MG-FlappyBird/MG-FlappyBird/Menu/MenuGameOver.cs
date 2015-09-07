@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MG_FlappyBird.GUI;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MG_FlappyBird.Menu
 {
@@ -31,9 +32,12 @@ namespace MG_FlappyBird.Menu
 
         int medalLevel;
         Medal medal;
+        SoundEffect highSound;
 
         Score writeScore;
         Score writeBest;
+
+        bool soundPlayed;
 
         // CONSTRUCTOR
         public MenuGameOver()
@@ -54,13 +58,25 @@ namespace MG_FlappyBird.Menu
             score = MenuBase.TotalScore;
 
             if (MenuBase.NewScore && score > 50)
+            {
                 medalLevel = 0;
+                highSound = RessourcesManager.gold;
+            }
             else if (MenuBase.NewScore && score > 25)
+            {
                 medalLevel = 1;
+                highSound = RessourcesManager.gold;
+            }
             else if (MenuBase.NewScore)
+            {
                 medalLevel = 2;
+                highSound = RessourcesManager.gold;
+            }
             else
+            {
                 medalLevel = 3;
+                highSound = null;
+            }
             medal = new Medal(medalLevel, new Point((Game1.screenWidth / 2 - boxSource.Width * 3 / 2) + 13 * 3, (Game1.screenHeight / 2 - boxSource.Height * 3 / 2) + 21 * 3));
 
             writeScore = new Score((Game1.screenWidth / 2 - boxSource.Width * 3 / 2) + 92 * 3, (Game1.screenHeight / 2 - boxSource.Height * 3 / 2) + 17 * 3, false);
@@ -68,6 +84,7 @@ namespace MG_FlappyBird.Menu
             
             newScoreSource = new Rectangle(617, 58, 16, 7);
             newScore = new Rectangle((Game1.screenWidth / 2 - boxSource.Width * 3 / 2) + 60 * 3, (Game1.screenHeight / 2 - boxSource.Height * 3 / 2) + 8 * 3, newScoreSource.Width * 3, newScoreSource.Height * 3);
+            soundPlayed = false;
         }
 
         // METHODS
@@ -77,6 +94,11 @@ namespace MG_FlappyBird.Menu
         {
             if (!loaded)
             {
+                if (!soundPlayed && title.Y > 32)
+                {
+                    soundPlayed = true;
+                    RessourcesManager.over.Play();
+                }
                 if (title.Y < 64)
                     title.Y += 8;
                 box.Y -= 8;
@@ -85,6 +107,7 @@ namespace MG_FlappyBird.Menu
                 {
                     box.Y = Game1.screenHeight / 2 - box.Height / 2;
                     loaded = true;
+                    soundPlayed = false;
                 }
             }
             else
@@ -96,6 +119,11 @@ namespace MG_FlappyBird.Menu
                 if (menuButton.Clicked)
                     GameMain.ChangeMenu = "main";
                 medal.Update(gameTime);
+                if (!soundPlayed && highSound != null)
+                {
+                    highSound.Play();
+                    soundPlayed = true;
+                }
             }
         }
 

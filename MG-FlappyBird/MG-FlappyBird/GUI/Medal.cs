@@ -37,7 +37,7 @@ namespace MG_FlappyBird.GUI
         public void Update(GameTime gameTime)
         {
             if (opacity <= 1f)
-                opacity += 0.01f;
+                opacity += 0.05f;
         }
 
         public void Draw(SpriteBatch spriteBatch)
