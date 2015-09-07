@@ -37,6 +37,9 @@ namespace MG_FlappyBird.Menu
 
         string[] txtScore;
 
+        KeyboardState presentKey;
+        KeyboardState pastKey;
+
         // CONSTRUCTOR
         public MenuGame()
         {
@@ -69,7 +72,10 @@ namespace MG_FlappyBird.Menu
         // UPDATE & DRAW
         public override void Update(GameTime gameTime)
         {
+            presentKey = Keyboard.GetState();
             base.Update(gameTime);
+            if (presentKey.IsKeyDown(Keys.Escape) && pastKey != presentKey && started)
+                paused = !paused;
             if (!paused)
             {
                 if (started)
@@ -178,6 +184,7 @@ namespace MG_FlappyBird.Menu
                     paused = false;
                 }
             }
+            pastKey = presentKey;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

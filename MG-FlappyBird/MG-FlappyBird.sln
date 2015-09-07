@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MG-FlappyBird", "MG-FlappyBird\MG-FlappyBird.csproj", "{729C1D35-41EF-4005-B149-4A5214BE7073}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MG-FlappyBird Setup Wizard", "MG-FlappyBird Setup Wizard\MG-FlappyBird Setup Wizard.vdproj", "{8F3FACB5-2D65-4058-BA64-AACA4547B002}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -17,8 +15,6 @@ Global
 		{729C1D35-41EF-4005-B149-4A5214BE7073}.Debug|x86.Build.0 = Debug|x86
 		{729C1D35-41EF-4005-B149-4A5214BE7073}.Release|x86.ActiveCfg = Release|x86
 		{729C1D35-41EF-4005-B149-4A5214BE7073}.Release|x86.Build.0 = Release|x86
-		{8F3FACB5-2D65-4058-BA64-AACA4547B002}.Debug|x86.ActiveCfg = Debug
-		{8F3FACB5-2D65-4058-BA64-AACA4547B002}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
